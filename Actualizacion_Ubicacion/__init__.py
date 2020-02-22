@@ -1,0 +1,1 @@
+default_app_config = 'Actualizacion_Ubicacion.apps.ActualizacionUbicacionConfig'
