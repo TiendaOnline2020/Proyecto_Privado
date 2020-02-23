@@ -6,10 +6,26 @@ from .models import Afiliado
 
 
 class Afiliado_Admin(admin.ModelAdmin):
+    '''
+    fields = (
+        ('organizacion_polita','organizacion_politica_region',),
+        'fecha_afiliacion',
+        ('numero_dni','estado_civil'),
+        'lugar_nacimiento',
+        ('region_afiliado',
+         'provincia_afiliado',
+         'distrito_afiliado',),
+        ('avenida_afiliado',
+         'avenida_numero_afiliado',),
+        ('urbanizacion_afiliado',
+         'urbanizacion_numero_afiliado',),
+        'correo',
+    )
+    '''
     fieldsets = [
-        (None, {'fields': ['organizacion_polita', 'organizacion_politica_region']}),
-        ('Fecha de Afiliación', {'fields': ['fecha_afiliacion'], 'classes': ['collapse']}),
-        ('Datos Personales', {'fields': ['numero_dni', 'estado_civil', 'lugar_nacimiento'], 'classes':['collapse']}),
+        ('Organizacion Politica', {'fields': ['organizacion_polita', 'organizacion_politica_region']}),
+        ('Fecha de Afiliación', {'fields': ['fecha_afiliacion']}),
+        ('Datos Personales', {'fields': ['numero_dni', 'estado_civil', 'lugar_nacimiento']}),
         ('Domicilio Actual', {'fields': [
             ('region_afiliado',
             'provincia_afiliado',
@@ -18,8 +34,7 @@ class Afiliado_Admin(admin.ModelAdmin):
             'avenida_numero_afiliado',),
             ('urbanizacion_afiliado',
             'urbanizacion_numero_afiliado',),
-            'correo'],
-            'classes':['collapse']}
+            'correo']}
         ),
     ]
     def my_url_field(self, obj):
@@ -36,5 +51,6 @@ class Afiliado_Admin(admin.ModelAdmin):
         'sexo',
         'my_url_field',
     )
+    search_fields = ('numero_dni','nombre_afiliado','apellido_paterno_afiliado','apellido_materno_afiliado')
 
 admin.site.register(Afiliado, Afiliado_Admin)

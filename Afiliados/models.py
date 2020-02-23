@@ -1,8 +1,8 @@
 from django.db import models
 from smart_selects.db_fields import ChainedForeignKey
-
+from .generar_regiones import generar_regiones
 from django.conf import settings
-from ubication.models import Region, Provincia, Distrito
+from ubicacion.models import Region, Provincia, Distrito
 import requests
 # Create your models here.
 
@@ -17,12 +17,12 @@ organizacion_politica = (
     ('N', 'Nacional'),
     ('R', 'Regional')
 )
-
+regiones_eleccion = generar_regiones()
 
 class Afiliado(models.Model):
     organizacion_polita = models.CharField(max_length=255, verbose_name="Alcance de la Organizacion Politica ",
                                            choices=organizacion_politica)
-    organizacion_politica_region = models.CharField(max_length=255, null=True, blank=True, verbose_name="Region (opcional)")
+    organizacion_politica_region = models.CharField(max_length=255, null=True, choices=regiones_eleccion, blank=True, verbose_name="Region (opcional)")
     fecha_afiliacion = models.DateField(auto_now=False, auto_now_add=False)
     #Datos Personales
     numero_dni = models.CharField(max_length=8, verbose_name="Numero de DNI ")
@@ -109,3 +109,8 @@ class Afiliado(models.Model):
 
     def __str__(self):
         return self.nombre_afiliado
+
+    class Meta:
+        verbose_name_plural = "Afiliados"
+        verbose_name = "Afiliado"
+

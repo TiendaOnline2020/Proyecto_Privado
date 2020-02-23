@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Registro</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<style>
+body{
+    background-color: #525252;
+}
+.centered-form{
+	margin-top: 200px;
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+	box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+}
+</style>
+<body >
+<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Registro de Responsables <small>Complete todos los campos</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form method="post" action="">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" name="Nombre_Usuario" class="form-control input-sm" required="" id="id_Nombre_Usuario" placeholder="Nombre de Usuario">
+			    			</div>
+                            <div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+                                    {{ form.Numero_Dni }}
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        {{ form.Nombre_Responsable }}
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+                                    <input type="text" name="Apellido_Paterno_Responsable" class="form-control input-sm" required="" id="id_Apellido_Paterno_Responsable" placeholder="Apellido Paterno">
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <input type="text" name="Apellido_Materno_Responsable" class="form-control input-sm" required="" id="id_Apellido_Materno_Responsable" placeholder="Apellido Materno">
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="form-group">
+                                <input type="email" name="Email" class="form-control input-sm" required="" id="id_Email" placeholder="Cuenta de Email">
+			    			</div>
+                            <div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+                                    {{ form.Region.label }}
+                                    {{ form.Region }}
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <input type="text" name="Telefono" class="form-control input-sm" required="" id="id_Telefono" placeholder="Numero de Telefono">
+			    					</div>
+			    				</div>
+			    			</div>
+
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <input type="password" name="contra1" class="form-control input-sm" required="" id="id_contra1" placeholder="Ingresa su Contraseña">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+                                        <input type="password" name="contra2" class="form-control input-sm" required="" id="id_contra2" placeholder="Confirme su Contraseña">
+			    					</div>
+			    				</div>
+			    			</div>
+                            <div class="form-group">
+                                {{ form.clave }}
+			    			</div>
+			    			<input type="submit" value="Register" class="btn btn-info btn-block">
+
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+</html>

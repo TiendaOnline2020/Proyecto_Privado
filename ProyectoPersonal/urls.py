@@ -16,8 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Afiliados.views import descargar_pdf
+from django.contrib.auth.views import LogoutView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('logout/', LogoutView.as_view(), name="logout"),
     path('descargar/<dni>', descargar_pdf, name="Descarga_PDF"),
     path('chaining/', include('smart_selects.urls')),
+    path('', include('Afiliados.urls', namespace='afiliados')),
+    path('registrar/',include('responsable.urls', namespace='registrar')),
 ]
