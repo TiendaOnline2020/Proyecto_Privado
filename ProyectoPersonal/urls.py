@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from Afiliados.views import descargar_pdf
 from django.contrib.auth.views import LogoutView
-
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', LogoutView.as_view(), name="logout"),
@@ -25,4 +26,4 @@ urlpatterns = [
     path('chaining/', include('smart_selects.urls')),
     path('', include('Afiliados.urls', namespace='afiliados')),
     path('registrar/',include('responsable.urls', namespace='registrar')),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

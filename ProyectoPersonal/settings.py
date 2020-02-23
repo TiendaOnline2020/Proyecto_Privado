@@ -25,7 +25,7 @@ SECRET_KEY = '#b7e*(rg_@74#fb_1-9_ue3=2wtvv!8lx%8msf_8mr+anv(e3d'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ProyectoPersonal.urls'
@@ -87,7 +88,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-'''
+
 
 DATABASES = {
     'default': {
@@ -98,6 +99,17 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5433',
     }
+}
+
+'''
+
+import dj_database_url
+from decouple import config
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 
@@ -144,6 +156,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ARCHIVO_PDF_ORIGINAL = 'Ficha_de_Afiliacion.pdf'
 ARCHIVO_PDF_GUARDADO = 'Afiliado-{}'

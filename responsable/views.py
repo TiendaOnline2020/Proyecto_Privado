@@ -21,18 +21,17 @@ def Registar_Responsable(request):
             contra2 = formulario.cleaned_data.get('contra2')
             if not contra1 == contra2 :
                 return redirect('responsable:registro')
-            usuario = User()
-            usuario.username = formulario.cleaned_data.get('Nombre_Usuario')
+            usuario = User.objects.create_user(formulario.cleaned_data.get('Nombre_Usuario'),formulario.cleaned_data.get('Email'),formulario.cleaned_data.get('contra1'))
             usuario.first_name = formulario.cleaned_data.get('Nombre_Responsable')
             usuario.last_name = formulario.cleaned_data.get('Apellido_Paterno_Responsable') + formulario.cleaned_data.get('Apellido_Materno_Responsable')
-            usuario.email = formulario.cleaned_data.get('Email')
-            usuario.password = formulario.cleaned_data.get('contra1')
+            usuario.is_staff = True
             usuario.save()
             responsable_usuario = Responsable()
             responsable_usuario.usuario = usuario
             responsable_usuario.numero_dni = formulario.cleaned_data.get('Numero_Dni')
             responsable_usuario.numero_telefono = formulario.cleaned_data.get('Telefono')
             responsable_usuario.region = formulario.cleaned_data.get('Region')
+            responsable_usuario.save()
             return redirect('afiliados:casa')
 
 

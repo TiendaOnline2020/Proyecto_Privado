@@ -10,15 +10,14 @@ class Responsable(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     numero_telefono = models.CharField(max_length=12, null=True, blank=True)
     numero_dni = models.CharField(max_length=8, null=True, blank=True)
-    foto_imagen = models.ImageField(max_length=8, null=True, blank=True)
     region = models.CharField(max_length=25, null=True, blank=True)
     def save(self, *args, **kwargs):
-        self.usuario.is_staff = True
-        self.usuario.save()
+        usuario_responsable = User.objects.get(username=self.usuario.username)
+        usuario_responsable.is_staff = True
         try:
             grupo_afiliado = Group.objects.get(name='Grupo_Afiliado')
-            self.usuario.groups.add(grupo_afiliado)
-            self.usuario.save()
+            usuario_responsable.groups.add(grupo_afiliado)
+            usuario_responsable.save()
         except:
             pass
         super(Responsable, self).save(*args, **kwargs)
