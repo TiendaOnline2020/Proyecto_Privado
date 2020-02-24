@@ -30,4 +30,5 @@ urlpatterns = [
     path('chaining/', include('smart_selects.urls')),
     path('', include('Afiliados.urls', namespace='afiliados')),
     path('registrar/',include('responsable.urls', namespace='registrar')),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('admin/chaining/',include('smart_selects.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
