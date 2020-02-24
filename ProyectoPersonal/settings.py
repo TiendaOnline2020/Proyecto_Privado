@@ -96,7 +96,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'po',
+        'NAME': 'poo',
         'USER': 'postgres',
         'PASSWORD': 'Sebastian',
         'HOST': 'localhost',
@@ -104,8 +104,8 @@ DATABASES = {
     }
 }
 
-'''
 
+'''
 import dj_database_url
 from decouple import config
 
@@ -161,6 +161,8 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 
 
 ARCHIVO_PDF_ORIGINAL = 'Ficha_de_Afiliacion.pdf'
