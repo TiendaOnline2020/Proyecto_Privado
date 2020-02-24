@@ -8,6 +8,7 @@ import six
 from smart_selects import form_fields
 
 
+
 class IntrospectiveFieldMixin(object):
     to_app_name = None
     to_model_name = None

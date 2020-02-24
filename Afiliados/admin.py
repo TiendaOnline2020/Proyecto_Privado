@@ -4,24 +4,7 @@ from django.utils.html import format_html
 from .models import Afiliado
 # Register your models here.
 
-
 class Afiliado_Admin(admin.ModelAdmin):
-    '''
-    fields = (
-        ('organizacion_polita','organizacion_politica_region',),
-        'fecha_afiliacion',
-        ('numero_dni','estado_civil'),
-        'lugar_nacimiento',
-        ('region_afiliado',
-         'provincia_afiliado',
-         'distrito_afiliado',),
-        ('avenida_afiliado',
-         'avenida_numero_afiliado',),
-        ('urbanizacion_afiliado',
-         'urbanizacion_numero_afiliado',),
-        'correo',
-    )
-    '''
     fieldsets = [
         ('Organizacion Politica', {'fields': ['organizacion_polita', 'organizacion_politica_region']}),
         ('Fecha de Afiliación', {'fields': ['fecha_afiliacion']}),
@@ -41,6 +24,12 @@ class Afiliado_Admin(admin.ModelAdmin):
         return format_html('<a href="%s%s">%s</a>' % ('http://127.0.0.1:8000/descargar/',obj.numero_dni,'Descargar Ficha Afiliación'))
     my_url_field.allow_tags = True
     my_url_field.short_description = 'Ficha Afiliación PDF'
+
+    def save_model(self, request, obj, form, change):
+        if not obj.creador:
+            obj.creador = request.user
+        obj.save()
+
     list_display = (
         'numero_dni',
         'nombre_afiliado',
@@ -49,6 +38,7 @@ class Afiliado_Admin(admin.ModelAdmin):
         'fecha_nacimiento_afiliado',
         'estado_civil',
         'sexo',
+        'creador',
         'my_url_field',
     )
     search_fields = ('numero_dni','nombre_afiliado','apellido_paterno_afiliado','apellido_materno_afiliado')

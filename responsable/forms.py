@@ -7,7 +7,6 @@ from django.conf import settings
 from Afiliados.generar_regiones import generar_regiones
 choices_regiones = generar_regiones()
 
-print(choices_regiones)
 class Responsable_Form(forms.Form):
     Numero_Dni = forms.CharField(
         label='Numero de Dni', required=True, widget=forms.TextInput(attrs={'class': 'form-control input-sm','placeholder': 'Numero DNI'})
@@ -31,7 +30,7 @@ class Responsable_Form(forms.Form):
         label='Numero de telefono', required=True, widget=forms.TextInput(attrs={'class': 'form-control input-sm'})
     )
     Region = forms.ChoiceField(
-        label='Region encargada', required=True, widget=forms.Select, choices=choices_regiones
+        label='Region encargada', required=True, widget=forms.Select(attrs={'class': 'form-control input-sm'}), choices=choices_regiones
     )
     contra1 = forms.CharField(
         label='Contraseña', required=True, widget=forms.PasswordInput(attrs={'class': 'form-control input-sm'})

@@ -19,6 +19,10 @@ from Afiliados.views import descargar_pdf
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+admin.site.site_header = 'Administrador'
+admin.site.site_title = 'Administrador'
+admin.site.index_title = 'Administrador'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', LogoutView.as_view(), name="logout"),

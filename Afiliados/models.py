@@ -1,5 +1,7 @@
 from django.db import models
+
 from smart_selects.db_fields import ChainedForeignKey
+
 from .generar_regiones import generar_regiones
 from django.conf import settings
 from ubicacion.models import Region, Provincia, Distrito
@@ -36,6 +38,7 @@ class Afiliado(models.Model):
     #Domicilio Actual
 
     region_afiliado = models.ForeignKey(Region, on_delete=models.CASCADE, null=True, blank=True)
+
     provincia_afiliado = ChainedForeignKey(
         Provincia,
         chained_field="region_afiliado",
@@ -62,7 +65,7 @@ class Afiliado(models.Model):
     region_afiliado_guardado = models.CharField(null=True, blank=True, max_length=255)
     provincia_afiliado_guardado = models.CharField(null=True, blank=True, max_length=255)
     distrito_afiliado_guardado = models.CharField(null=True, blank=True, max_length=255)
-
+    creador = models.CharField(max_length=255, null=True, blank=True)
     def save(self, *args, **kwargs):
 
         url = settings.URL_API
@@ -89,27 +92,10 @@ class Afiliado(models.Model):
 
 
         self.fecha_nacimiento_afiliado = str(informacion['FechaNacimiento'])
-        '''
-                if self.telefono:
-            self.confirmacion_wsp = True
-        if self.correo:
-            self.confirmacion_correo = True
-        if settings.MANDAR_MENSAJES_CORREO:
-            subject = settings.ASUNTO
-            message = settings.SALUDO.format(self.nombre_persona) + settings.MENSAJE
-            email_from = settings.EMAIL_HOST_USER
-            recipient_list = [self.correo]
-            email = EmailMessage(subject, message, email_from, recipient_list)
-            email.send()
-        '''
         self.distrito_afiliado_guardado = self.distrito_afiliado.Nombre
         self.provincia_afiliado_guardado = self.provincia_afiliado.Nombre
         self.region_afiliado_guardado = self.region_afiliado.Nombre
         super(Afiliado, self).save(*args, **kwargs)
-
-    def __str__(self):
-        return self.nombre_afiliado
-
     class Meta:
         verbose_name_plural = "Afiliados"
         verbose_name = "Afiliado"

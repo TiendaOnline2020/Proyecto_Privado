@@ -65,8 +65,8 @@ class Ubicacion_Distrito(admin.ModelAdmin):
             distrito.provincia_distrito = provincia
             distrito.save()
 
-
+'''
 admin.site.register(Region, Ubicacion_Region)
 admin.site.register(Provincia, Ubicacion_Provincia)
 admin.site.register(Distrito, Ubicacion_Distrito)
-
+'''
