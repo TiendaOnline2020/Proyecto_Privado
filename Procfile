@@ -1,1 +1,1 @@
-web: gunicorn ProyectoPersonal.wsgi --log-file -
+web: python ProyectoPersonal/manage.py collectstatic --noinput ; gunicorn ProyectoPersonal.wsgi --log-file -
