@@ -15,7 +15,8 @@ def descargar_pdf(request,dni):
     return editar_pdf(afiliado_dni)
 
 def home(request):
-    if not Region.objects.all().exists():
+    region = Region.objects.all()
+    if not region.exists():
         for valor_region in Lista_regiones:
             valor_region_lista = valor_region.split(',')
             objeto_region = Region()
@@ -23,7 +24,8 @@ def home(request):
             h = HTMLParser()
             objeto_region.Nombre = str(h.unescape(valor_region_lista[1].replace("'", ""))).lower().capitalize()
             objeto_region.save()
-    if not Provincia.objects.all().exists():
+    provincia = Provincia.objects.all()
+    if not provincia.exists():
         for valor_provincia in Lista_provincia:
             valor_provincia_lista = valor_provincia.split(',')
             objeto_provincia = Provincia()
@@ -34,7 +36,8 @@ def home(request):
             objeto_provincia_region = Region.objects.get(id=int(valor_provincia_lista[2]))
             objeto_provincia.region_provincia = objeto_provincia_region
             objeto_provincia.save()
-    if not Distrito.objects.all().exists():
+    distrito = Distrito.objects.all()
+    if not distrito.exists():
         for valor_distrito in Lista_distrito:
             valor_distrito_lista = valor_distrito.split(',')
             objeto_distrito = Distrito()
