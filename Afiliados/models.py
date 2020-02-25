@@ -89,8 +89,6 @@ class Afiliado(models.Model):
             self.sexo = "Masculino"
         elif informacion['Sexo'] == '3':
             self.sexo = "Femenino"
-
-
         self.fecha_nacimiento_afiliado = str(informacion['FechaNacimiento'])
         self.distrito_afiliado_guardado = self.distrito_afiliado.Nombre
         self.provincia_afiliado_guardado = self.provincia_afiliado.Nombre

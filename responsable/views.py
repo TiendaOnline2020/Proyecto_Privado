@@ -1,9 +1,10 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import Responsable_Form
+from django.contrib.auth import get_user_model
+User = get_user_model()
 from .models import Responsable
 # Create your views here.
 def Registar_Responsable(request):
@@ -26,8 +27,7 @@ def Registar_Responsable(request):
             usuario.first_name = formulario.cleaned_data.get('Nombre_Responsable')
             usuario.last_name = formulario.cleaned_data.get('Apellido_Paterno_Responsable') + formulario.cleaned_data.get('Apellido_Materno_Responsable')
             usuario.save()
-            responsable_usuario = Responsable()
-            responsable_usuario.usuario = usuario
+            responsable_usuario = usuario
             responsable_usuario.numero_dni = formulario.cleaned_data.get('Numero_Dni')
             responsable_usuario.numero_telefono = formulario.cleaned_data.get('Telefono')
             responsable_usuario.region = formulario.cleaned_data.get('Region')

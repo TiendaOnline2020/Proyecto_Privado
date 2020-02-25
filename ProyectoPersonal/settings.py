@@ -53,9 +53,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-
-
 ]
 '''
 'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -92,14 +89,14 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+'''
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'poo',
+        'NAME': '',
         'USER': 'postgres',
-        'PASSWORD': 'Sebastian',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5433',
     }
@@ -115,7 +112,7 @@ DATABASES = {
         default=config('DATABASE_URL')
     )
 }
-
+'''
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -138,7 +135,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-ES'
 TIME_ZONE = 'America/Lima'
 LOGIN_REDIRECT_URL = '/admin/'
 LOGOUT_REDIRECT_URL = '/admin/'
@@ -149,6 +146,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'responsable.Responsable'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -159,8 +157,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
     )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+'''
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+'''
 
 
 

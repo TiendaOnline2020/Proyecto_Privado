@@ -38,7 +38,5 @@ class Responsable_Form(forms.Form):
     contra2 = forms.CharField(
         label='Confirmar contraseña', required=True, widget=forms.PasswordInput(attrs={'class': 'form-control input-sm'})
     )
-    clave = forms.CharField(
-        label='Clave Unica', required=True, widget=forms.TextInput(attrs={'class': 'form-control input-sm'})
-    )
+
 
